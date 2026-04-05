@@ -5,10 +5,11 @@ interface HeaderProps {
   onGoHome: () => void;
   onOpenSettings: () => void;
   onOpenManager: () => void;
+  onOpenGuide: () => void;
   currentScreen: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ onGoHome, onOpenSettings, onOpenManager, currentScreen }) => {
+const Header: React.FC<HeaderProps> = ({ onGoHome, onOpenSettings, onOpenManager, onOpenGuide, currentScreen }) => {
   return (
     <header className="fixed top-0 left-0 right-0 z-[100] bg-slate-950/70 backdrop-blur-xl border-b border-white/10 h-20 flex items-center transition-all duration-300">
       <div className="max-w-7xl mx-auto w-full px-6 flex justify-between items-center">
@@ -24,7 +25,7 @@ const Header: React.FC<HeaderProps> = ({ onGoHome, onOpenSettings, onOpenManager
             <h1 className="text-xl font-black text-white tracking-tighter leading-none uppercase">
               GÓC GAME <span className="text-blue-400">LỚP HỌC</span>
             </h1>
-            <p className="text-[10px] font-bold text-slate-500 tracking-widest uppercase">Premium Edition</p>
+            <p className="text-[10px] font-bold text-slate-500 tracking-widest">Phát triển bởi thầy Nguyễn Việt Hùng</p>
           </div>
         </div>
 
@@ -32,6 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onGoHome, onOpenSettings, onOpenManager
           <div className="hidden md:flex items-center gap-6 mr-6 border-r border-white/10 pr-6">
             <button onClick={onGoHome} className={`text-xs font-black uppercase tracking-widest transition-colors ${currentScreen === 'home' ? 'text-blue-400' : 'text-slate-400 hover:text-white'}`}>Trang chủ</button>
             <button onClick={onOpenManager} className={`text-xs font-black uppercase tracking-widest transition-colors ${currentScreen === 'manager' ? 'text-blue-400' : 'text-slate-400 hover:text-white'}`}>Kho đề</button>
+            <button onClick={onOpenGuide} className={`text-xs font-black uppercase tracking-widest transition-colors ${currentScreen === 'guide' ? 'text-blue-400' : 'text-slate-400 hover:text-white'}`}>Hướng dẫn</button>
           </div>
 
           <button 

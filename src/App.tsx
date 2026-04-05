@@ -12,6 +12,7 @@ import { useDocxImport } from './hooks/useDocxImport';
 // Layout & Modals
 import Header from './components/layout/Header';
 import Home from './components/Home';
+import Guide from './components/Guide';
 import QuestionManager from './components/manager/QuestionManager';
 import QuestionModal from './components/modals/QuestionModal';
 import AISettingsModal from './components/modals/AISettingsModal';
@@ -130,6 +131,7 @@ export default function App() {
         onGoHome={() => setScreen('home')}
         onOpenSettings={() => setIsAISettingsOpen(true)}
         onOpenManager={() => setScreen('manager')}
+        onOpenGuide={() => setScreen('guide')}
         currentScreen={screen}
       />
 
@@ -155,6 +157,12 @@ export default function App() {
                 onGenerateAI={handleGenerateAI}
                 hasAIKey={!!aiSettings.apiKey}
               />
+            </motion.div>
+          )}
+
+          {screen === 'guide' && (
+            <motion.div key="guide" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <Guide />
             </motion.div>
           )}
 

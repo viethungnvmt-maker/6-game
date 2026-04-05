@@ -81,7 +81,7 @@ const Home: React.FC<HomeProps> = ({ onSelectGame, onOpenManager }) => {
       </div>
 
       <footer className="mt-auto py-12 text-slate-600 font-black tracking-widest text-[10px] uppercase opacity-40 border-t border-white/5 w-full text-center">
-        PREMIUM CLASSROOM EXPERIENCE • DESIGNED BY AI FOR HERO TEACHERS • 2026
+        © 2026 Góc Game Lớp Học — Phát triển bởi thầy Nguyễn Việt Hùng
       </footer>
 
       {/* Dynamic Background Effects */}
