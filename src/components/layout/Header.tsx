@@ -10,40 +10,44 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onGoHome, onOpenSettings, onOpenManager, currentScreen }) => {
   return (
-    <header className="w-full bg-white/10 backdrop-blur-md border-b border-white/20 p-4 sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <header className="fixed top-0 left-0 right-0 z-[100] bg-slate-950/70 backdrop-blur-xl border-b border-white/10 h-20 flex items-center transition-all duration-300">
+      <div className="max-w-7xl mx-auto w-full px-6 flex justify-between items-center">
         <div 
-          className="flex items-center gap-2 cursor-pointer group"
+          className="flex items-center gap-3 cursor-pointer group"
           onClick={onGoHome}
         >
-          <span className="text-3xl group-hover:scale-110 transition-transform">🎮</span>
-          <h1 className="text-xl font-black text-white tracking-tighter">
-            GÓC GAME LỚP HỌC
-          </h1>
+          <div className="relative">
+            <span className="text-4xl group-hover:scale-110 transition-transform block">🎮</span>
+            <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-slate-900 animate-pulse" />
+          </div>
+          <div>
+            <h1 className="text-xl font-black text-white tracking-tighter leading-none uppercase">
+              GÓC GAME <span className="text-blue-400">LỚP HỌC</span>
+            </h1>
+            <p className="text-[10px] font-bold text-slate-500 tracking-widest uppercase">Premium Edition</p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          {currentScreen !== 'home' && (
-            <button 
-              onClick={onGoHome}
-              className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors"
-              title="Trang chủ"
-            >
-              <Home size={24} />
-            </button>
-          )}
+        <div className="flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-6 mr-6 border-r border-white/10 pr-6">
+            <button onClick={onGoHome} className={`text-xs font-black uppercase tracking-widest transition-colors ${currentScreen === 'home' ? 'text-blue-400' : 'text-slate-400 hover:text-white'}`}>Trang chủ</button>
+            <button onClick={onOpenManager} className={`text-xs font-black uppercase tracking-widest transition-colors ${currentScreen === 'manager' ? 'text-blue-400' : 'text-slate-400 hover:text-white'}`}>Kho đề</button>
+          </div>
+
           <button 
             onClick={onOpenManager}
-            className="px-4 py-2 bg-white/20 hover:bg-white/30 text-white rounded-xl font-bold flex items-center gap-2 transition-all border border-white/30"
+            className="hidden sm:flex px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-full font-black text-xs items-center gap-2 transition-all shadow-lg shadow-blue-600/20 active:scale-95"
           >
-            Quản lý câu hỏi
+            QUẢN LÝ
           </button>
+          
           <button 
             onClick={onOpenSettings}
-            className="p-2 text-white hover:bg-white/10 rounded-xl transition-colors"
+            className="relative p-3 text-slate-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-2xl transition-all group"
             title="Cài đặt AI"
           >
-            <Settings size={24} />
+            <Settings size={20} className="group-hover:rotate-90 transition-transform duration-500" />
+            <div className="absolute -top-1 -right-1 w-2 h-2 bg-rose-500 rounded-full animate-ping" />
           </button>
         </div>
       </div>

@@ -133,7 +133,7 @@ export default function App() {
         currentScreen={screen}
       />
 
-      <main>
+      <main className="pt-20">
         <AnimatePresence mode="wait">
           {screen === 'home' && (
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>

@@ -35,37 +35,16 @@ const Home: React.FC<HomeProps> = ({ onSelectGame, onOpenManager }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 p-8 flex flex-col items-center">
-      <header className="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center mb-20 z-10 gap-8">
+    <div className="min-h-[calc(100vh-80px)] bg-slate-950 p-6 md:p-12 flex flex-col items-center">
+      <div className="w-full max-w-7xl mb-12">
         <motion.div 
-          initial={{ x: -50, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-          className="flex items-center gap-6"
+          initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}
+          className="flex items-center gap-4 border-l-4 border-blue-600 pl-6 py-2"
         >
-          <div className="relative">
-            <span className="text-7xl block animate-bounce-slow">🎮</span>
-            <div className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black px-2 py-0.5 rounded-full animate-pulse">PRO</div>
-          </div>
-          <div>
-            <h1 className="text-6xl font-black text-white tracking-tighter leading-none mb-2">
-              GÓC GAME <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-500 to-rose-500 animate-gradient-x">LỚP HỌC</span>
-            </h1>
-            <p className="text-slate-500 font-bold tracking-[0.3em] uppercase text-xs">Educational AI Game Suite v2.0</p>
-          </div>
+          <h2 className="text-3xl font-black text-white tracking-tight uppercase">Khám phá trò chơi</h2>
+          <div className="h-px flex-1 bg-white/10 ml-4" />
         </motion.div>
-        
-        <motion.div 
-          initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }}
-          className="flex gap-4"
-        >
-          <button 
-            onClick={onOpenManager}
-            className="bg-white/10 hover:bg-white/20 text-white px-10 py-5 rounded-[2rem] font-black flex items-center gap-4 transition-all backdrop-blur-2xl border border-white/20 shadow-2xl group"
-          >
-            <Settings className="group-hover:rotate-90 transition-transform" size={28} /> 
-            QUẢN LÝ KHO ĐỀ
-          </button>
-        </motion.div>
-      </header>
+      </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 w-full max-w-7xl z-10 pb-20">
         {games.map((game, index) => (
