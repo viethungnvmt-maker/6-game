@@ -608,7 +608,33 @@ const QuestionManager: React.FC<QuestionManagerProps> = ({
                     <div>
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-2 block">🖼️ Hình ảnh bí mật</label>
                       <input value={gameSettings.puzzleImage} onChange={e => onGameSettingsChange({ ...gameSettings, puzzleImage: e.target.value })}
-                        placeholder="URL hình ảnh (PNG, JPG, WEBP)" className="w-full bg-slate-950 text-white px-4 py-4 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm" />
+                        placeholder="URL hình ảnh (PNG, JPG, WEBP)" className="w-full bg-slate-950 text-white px-4 py-3 rounded-xl border border-white/10 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm mb-3" />
+                      <div className="flex gap-3 items-start">
+                        <label className="flex-1 flex flex-col items-center gap-2 p-4 bg-slate-950 border-2 border-dashed border-white/10 rounded-xl cursor-pointer hover:border-blue-500/50 hover:bg-blue-600/5 transition-all group">
+                          <Upload size={20} className="text-slate-500 group-hover:text-blue-400 transition-colors" />
+                          <span className="text-[10px] text-slate-500 group-hover:text-blue-400 font-bold transition-colors">Nhấn để tải ảnh lên</span>
+                          <span className="text-[9px] text-slate-600">(PNG, JPG, WEBP đều được)</span>
+                          <input type="file" accept="image/*" className="hidden" onChange={e => {
+                            const file = e.target.files?.[0];
+                            if (!file) return;
+                            if (file.size > 5 * 1024 * 1024) { alert('Ảnh quá lớn! Tối đa 5MB.'); return; }
+                            const reader = new FileReader();
+                            reader.onload = (ev) => {
+                              onGameSettingsChange({ ...gameSettings, puzzleImage: ev.target?.result as string });
+                            };
+                            reader.readAsDataURL(file);
+                          }} />
+                        </label>
+                        {gameSettings.puzzleImage && (
+                          <div className="relative w-24 h-24 rounded-xl overflow-hidden border border-white/10 shrink-0 group">
+                            <img src={gameSettings.puzzleImage} alt="Preview" className="w-full h-full object-cover" />
+                            <button onClick={() => onGameSettingsChange({ ...gameSettings, puzzleImage: '' })}
+                              className="absolute inset-0 bg-black/60 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">
+                              <Trash2 size={16} className="text-rose-400" />
+                            </button>
+                          </div>
+                        )}
+                      </div>
                       <p className="text-[10px] text-slate-600 mt-2">Để trống = dùng ảnh mặc định có sẵn</p>
                     </div>
                   </div>
