@@ -3,7 +3,10 @@ import { AnimatePresence, motion } from 'motion/react';
 import { 
   Question, 
   GameHistory, 
-  AISettings 
+  AISettings,
+  Subject,
+  ClassRoom,
+  GameSettings
 } from './types';
 import { useLocalStorage } from './hooks/useLocalStorage';
 import { useAI } from './hooks/useAI';
@@ -46,6 +49,20 @@ export default function App() {
   const [aiSettings, setAiSettings] = useLocalStorage<AISettings>('gglh_ai_settings', {
     apiKey: '',
     model: 'gemini-2.0-flash'
+  });
+  const [subjects, setSubjects] = useLocalStorage<Subject[]>('gglh_subjects', []);
+  const [classRooms, setClassRooms] = useLocalStorage<ClassRoom[]>('gglh_classrooms', []);
+  const [gameSettings, setGameSettings] = useLocalStorage<GameSettings>('gglh_game_settings', {
+    timers: {},
+    teams: { count: 2, names: ['Đội 1', 'Đội 2'] },
+    puzzleKeyword: '',
+    puzzleImage: '',
+    raceTrackLength: 30,
+    wheelTargetScore: 500,
+    auctionStartCoins: 1000,
+    auctionRounds: 10,
+    crosswordKeyword: '',
+    crosswordRows: [],
   });
 
   // State
@@ -147,6 +164,9 @@ export default function App() {
             <motion.div key="manager" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <QuestionManager 
                 questions={questions}
+                subjects={subjects}
+                classRooms={classRooms}
+                gameSettings={gameSettings}
                 onBack={() => setScreen('home')}
                 onAdd={() => { setEditingQuestion(null); setIsAddingQuestion(true); }}
                 onEdit={(q) => { setEditingQuestion(q); setIsAddingQuestion(true); }}
@@ -156,6 +176,9 @@ export default function App() {
                 onExport={handleExport}
                 onGenerateAI={handleGenerateAI}
                 hasAIKey={!!aiSettings.apiKey}
+                onSubjectsChange={setSubjects}
+                onClassRoomsChange={setClassRooms}
+                onGameSettingsChange={setGameSettings}
               />
             </motion.div>
           )}
